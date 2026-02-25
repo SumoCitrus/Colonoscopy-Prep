@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colonoscopy Prep Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #00B4A6;
+    --orange: #FF7043;
+    --yellow: #FFD600;
+    --green: #66BB6A;
+    --red: #EF5350;
+    --blue: #42A5F5;
+    --purple: #AB47BC;
+    --bg: #F8FFFE;
+    --text: #1A2E35;
+    --card: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== PAGES ===== */
+  .page { display: none; animation: fadeIn 0.5s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== HOME PAGE ===== */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #00B4A6 0%, #0097A7 40%, #00796B 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .home-icon {
+    font-size: 100px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+  .home-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .home-subtitle {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 50px;
+    font-weight: 700;
+  }
+
+  .lang-prompt {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--yellow);
+    margin-bottom: 30px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .lang-buttons {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lang-btn {
+    background: white;
+    border: none;
+    border-radius: 24px;
+    padding: 24px 48px;
+    cursor: pointer;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+  }
+  .lang-btn:hover { transform: scale(1.06) translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,0.25); }
+  .lang-btn .flag { font-size: 3rem; }
+  .lang-btn.en { color: var(--blue); }
+  .lang-btn.es { color: var(--orange); }
+
+  .hospital-note {
+    margin-top: 48px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  /* ===== TIMELINE PAGE ===== */
+  #timeline {
+    min-height: 100vh;
+    background: var(--bg);
+    padding-bottom: 60px;
+  }
+
+  .tl-header {
+    background: linear-gradient(135deg, #00B4A6, #0097A7);
+    padding: 24px 20px 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.35); }
+
+  .tl-header-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: white;
+    line-height: 1.2;
+  }
+  .tl-header-sub {
+    color: rgba(255,255,255,0.85);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    margin-top: 6px;
+    font-weight: 700;
+  }
+
+  /* Progress dots */
+  .progress-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 24px 20px 8px;
+    overflow-x: auto;
+  }
+  .prog-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    flex: 1;
+    max-width: 90px;
+  }
+  .prog-dot {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border: 3px solid #ddd;
+    background: white;
+    transition: all 0.3s;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .prog-step.active .prog-dot {
+    border-color: var(--teal);
+    background: var(--teal);
+    transform: scale(1.15);
+    box-shadow: 0 4px 16px rgba(0,180,166,0.4);
+  }
+  .prog-step.done .prog-dot { border-color: var(--green); background: var(--green); }
+  .prog-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    max-width: 80px;
+    line-height: 1.2;
+  }
+  .prog-step.active .prog-label { color: var(--teal); }
+  .prog-line {
+    flex: 1;
+    height: 3px;
+    background: #ddd;
+    margin-bottom: 28px;
+    max-width: 24px;
+  }
+
+  /* Step cards */
+  .step-content {
+    padding: 0 16px;
+    display: none;
+  }
+  .step-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+  .day-banner {
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .day-banner-icon { font-size: 3.5rem; }
+  .day-banner-text h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    line-height: 1.1;
+  }
+  .day-banner-text p { font-weight: 700; font-size: 1rem; margin-top: 4px; opacity: 0.85; }
+
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  }
+
+  .card-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Food grid */
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+  .food-item {
+    border-radius: 16px;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.82rem;
+    line-height: 1.3;
+  }
+  .food-item .emoji { font-size: 2.2rem; display: block; margin-bottom: 4px; }
+  .food-item.avoid { background: #FFEBEE; color: #C62828; border: 2px solid #EF9A9A; }
+  .food-item.ok { background: #E8F5E9; color: #2E7D32; border: 2px solid #A5D6A7; }
+
+  .avoid-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--red);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+  }
+  .ok-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+  }
+
+  /* Liquid visuals */
+  .liquid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+    gap: 10px;
+  }
+  .liquid-item {
+    border-radius: 14px;
+    padding: 10px 6px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  .liquid-item .emoji { font-size: 2rem; display: block; margin-bottom: 4px; }
+  .liquid-item.yes { background: #E3F2FD; color: #1565C0; border: 2px solid #90CAF9; }
+  .liquid-item.no { background: #FFEBEE; color: #B71C1C; border: 2px solid #EF9A9A; position: relative; }
+  .liquid-item.no::after {
+    content: '🚫';
+    position: absolute;
+    top: -8px; right: -8px;
+    font-size: 1.2rem;
+    background: white;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Golytely steps */
+  .prep-steps { counter-reset: step; }
+  .prep-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    background: #F5F5F5;
+    position: relative;
+    counter-increment: step;
+  }
+  .step-num {
+    min-width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+  .prep-step-body { flex: 1; }
+  .prep-step-body strong {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 900;
+  }
+  .prep-step-body p { font-size: 0.9rem; color: #555; font-weight: 700; line-height: 1.4; }
+  .step-icon { font-size: 2rem; }
+
+  /* Time tags */
+  .time-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+
+  /* Alert boxes */
+  .alert-box {
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .alert-box.warning { background: #FFF8E1; border-left: 5px solid var(--yellow); }
+  .alert-box.danger { background: #FFEBEE; border-left: 5px solid var(--red); }
+  .alert-box.success { background: #E8F5E9; border-left: 5px solid var(--green); }
+  .alert-box.info { background: #E3F2FD; border-left: 5px solid var(--blue); }
+  .alert-icon { font-size: 2rem; flex-shrink: 0; }
+  .alert-text strong { display: block; font-size: 1rem; font-weight: 900; margin-bottom: 4px; }
+  .alert-text p { font-size: 0.9rem; font-weight: 700; color: #444; line-height: 1.4; }
+
+  /* Navigation buttons */
+  .nav-buttons {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    background: rgba(248,255,254,0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #e0e0e0;
+  }
+  .nav-btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+  .nav-btn.prev { background: #ECEFF1; color: #546E7A; }
+  .nav-btn.next { background: var(--teal); color: white; }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Chaperone card */
+  .chaperone-big {
+    text-align: center;
+    padding: 32px 20px;
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border-radius: 24px;
+    margin-bottom: 16px;
+    border: 3px solid var(--green);
+  }
+  .chaperone-big .big-icon { font-size: 6rem; display: block; margin-bottom: 12px; }
+  .chaperone-big h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: #2E7D32;
+    margin-bottom: 8px;
+  }
+  .chaperone-big p { font-size: 1rem; font-weight: 700; color: #388E3C; line-height: 1.5; }
+
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li span:first-child { font-size: 1.5rem; flex-shrink: 0; }
+
+  /* Golytely visual */
+  .golytely-bottle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 2px solid #90CAF9;
+  }
+  .bottle-icon { font-size: 4rem; }
+  .bottle-info { flex: 1; }
+  .bottle-info h4 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #1565C0; }
+  .bottle-info p { font-size: 0.9rem; font-weight: 700; color: #1976D2; margin-top: 4px; line-height: 1.4; }
+
+  /* Responsive */
+  @media (max-width: 400px) {
+    .food-grid { grid-template-columns: repeat(3, 1fr); }
+    .lang-btn { padding: 20px 36px; min-width: 160px; }
+  }
+
+  .divider {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #aaa;
+    margin: 4px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== HOME PAGE ====== -->
+<div class="page active" id="home">
+  <div class="home-icon">🏥</div>
+  <h1 class="home-title" id="homeTitle">Colonoscopy<br>Prep Guide</h1>
+  <p class="home-subtitle" id="homeSub">Your step-by-step preparation plan</p>
+  <p class="lang-prompt" id="langPrompt">🌐 Choose Your Language</p>
+  <div class="lang-buttons">
+    <button class="lang-btn en" onclick="startGuide('en')">
+      <span class="flag">🇺🇸</span>
+      English
+    </button>
+    <button class="lang-btn es" onclick="startGuide('es')">
+      <span class="flag">🇲🇽</span>
+      Español
+    </button>
+  </div>
+  <p class="hospital-note" id="hospitalNote">📋 Please bring this guide to your appointment</p>
+</div>
+
+<!-- ====== TIMELINE PAGE ====== -->
+<div class="page" id="timeline">
+  <div class="tl-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <h1 class="tl-header-title" id="tlTitle">Your Colonoscopy Plan</h1>
+    <p class="tl-header-sub" id="tlSub">Follow each step carefully</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-bar" id="progressBar">
+    <div class="prog-step active" onclick="goToStep(0)">
+      <div class="prog-dot">🥦</div>
+      <div class="prog-label" id="prog0">5 Days Before</div>
+    </div>
+    <div class="prog-line"></div>
+    <div class="prog-step" onclick="goToStep(1)">
+      <div class="prog-dot">💧</div>
+      <div class="prog-label" id="prog1">1 Day Before</div>
+    </div>
+    <div class="prog-line"></div>
+    <div class="prog-step" onclick="goToStep(2)">
+      <div class="prog-dot">🚗</div>
+      <div class="prog-label" id="prog2">Day Of</div>
+    </div>
+  </div>
+
+  <!-- STEP 0: 5 Days Before -->
+  <div class="step-content active" id="step0">
+
+    <div class="day-banner" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border:2px solid #A5D6A7">
+      <div class="day-banner-icon">📅</div>
+      <div class="day-banner-text" style="color:#2E7D32">
+        <h2 id="s0title">5 Days Before Your Colonoscopy</h2>
+        <p id="s0sub">Eat a LOW-FIBER diet</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--red)">🚫 <span id="s0avoidTitle">AVOID These Foods</span></div>
+      <div class="avoid-label">❌ <span id="s0avoidLabel">Do NOT Eat</span></div>
+      <div class="food-grid">
+        <div class="food-item avoid"><span class="emoji">🫘</span><span id="f1">Beans & Lentils</span></div>
+        <div class="food-item avoid"><span class="emoji">🌽</span><span id="f2">Corn</span></div>
+        <div class="food-item avoid"><span class="emoji">🥦</span><span id="f3">Broccoli</span></div>
+        <div class="food-item avoid"><span class="emoji">🥬</span><span id="f4">Leafy Greens</span></div>
+        <div class="food-item avoid"><span class="emoji">🍎</span><span id="f5">Whole Fruit</span></div>
+        <div class="food-item avoid"><span class="emoji">🫐</span><span id="f6">Berries</span></div>
+        <div class="food-item avoid"><span class="emoji">🌰</span><span id="f7">Nuts & Seeds</span></div>
+        <div class="food-item avoid"><span class="emoji">🍞</span><span id="f8">Whole Grain Bread</span></div>
+        <div class="food-item avoid"><span class="emoji">🌮</span><span id="f9">Corn Tortillas</span></div>
+        <div class="food-item avoid"><span class="emoji">🥗</span><span id="f10">Raw Salad</span></div>
+        <div class="food-item avoid"><span class="emoji">🍅</span><span id="f11">Tomatoes</span></div>
+        <div class="food-item avoid"><span class="emoji">🥕</span><span id="f12">Raw Carrots</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">✅ <span id="s0okTitle">You CAN Eat These</span></div>
+      <div class="ok-label">✔️ <span id="s0okLabel">OK to Eat</span></div>
+      <div class="food-grid">
+        <div class="food-item ok"><span class="emoji">🍚</span><span id="g1">White Rice</span></div>
+        <div class="food-item ok"><span class="emoji">🍝</span><span id="g2">White Pasta</span></div>
+        <div class="food-item ok"><span class="emoji">🥚</span><span id="g3">Eggs</span></div>
+        <div class="food-item ok"><span class="emoji">🍗</span><span id="g4">Chicken</span></div>
+        <div class="food-item ok"><span class="emoji">🐟</span><span id="g5">Fish</span></div>
+        <div class="food-item ok"><span class="emoji">🥛</span><span id="g6">Low-fat Dairy</span></div>
+        <div class="food-item ok"><span class="emoji">🍌</span><span id="g7">Banana</span></div>
+        <div class="food-item ok"><span class="emoji">🥔</span><span id="g8">Peeled Potato</span></div>
+      </div>
+    </div>
+
+    <div class="alert-box warning">
+      <div class="alert-icon">💊</div>
+      <div class="alert-text">
+        <strong id="medAlert">Taking medications?</strong>
+        <p id="medAlertText">Talk to your doctor about which medicines to take or stop before the colonoscopy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1: 1 Day Before -->
+  <div class="step-content" id="step1">
+
+    <div class="day-banner" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border:2px solid #90CAF9">
+      <div class="day-banner-icon">💧</div>
+      <div class="day-banner-text" style="color:#1565C0">
+        <h2 id="s1title">1 Day Before — Clear Liquids Only</h2>
+        <p id="s1sub">No solid food today. Drink only clear liquids.</p>
+      </div>
+    </div>
+
+    <!-- Clear liquids -->
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">✅ <span id="s1okLiq">Clear Liquids You CAN Drink</span></div>
+      <div class="liquid-grid">
+        <div class="liquid-item yes"><span class="emoji">💧</span><span id="liq1">Water</span></div>
+        <div class="liquid-item yes"><span class="emoji">🍵</span><span id="liq2">Clear Broth</span></div>
+        <div class="liquid-item yes"><span class="emoji">🫖</span><span id="liq3">Tea (no milk)</span></div>
+        <div class="liquid-item yes"><span class="emoji">☕</span><span id="liq4">Black Coffee</span></div>
+        <div class="liquid-item yes"><span class="emoji">🍋</span><span id="liq5">Clear Apple Juice</span></div>
+        <div class="liquid-item yes"><span class="emoji">🟡</span><span id="liq6">Yellow/Orange Jello</span></div>
+        <div class="liquid-item yes"><span class="emoji">🧃</span><span id="liq7">White Grape Juice</span></div>
+        <div class="liquid-item yes"><span class="emoji">🫧</span><span id="liq8">Sports Drinks (clear)</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--red)">🚫 <span id="s1noLiq">Do NOT Drink These</span></div>
+      <div class="liquid-grid">
+        <div class="liquid-item no"><span class="emoji">🔴</span><span id="noLiq1">Red Juices</span></div>
+        <div class="liquid-item no"><span class="emoji">🍇</span><span id="noLiq2">Purple Grape Juice</span></div>
+        <div class="liquid-item no"><span class="emoji">🥛</span><span id="noLiq3">Milk</span></div>
+        <div class="liquid-item no"><span class="emoji">🧃</span><span id="noLiq4">OJ/Citrus Juice</span></div>
+        <div class="liquid-item no"><span class="emoji">🍺</span><span id="noLiq5">Alcohol</span></div>
+        <div class="liquid-item no"><span class="emoji">🥤</span><span id="noLiq6">Red/Purple Jello</span></div>
+      </div>
+    </div>
+
+    <div class="alert-box danger">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-text">
+        <strong id="noRedAlert">⛔ NO Red or Purple Drinks!</strong>
+        <p id="noRedText">Red and purple colors look like blood during the colonoscopy. This can cause your doctor to think something is wrong. Avoid ALL red and purple liquids!</p>
+      </div>
+    </div>
+
+    <!-- GoLytely -->
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">🧪 <span id="golytelyTitle">GoLytely Bowel Prep</span></div>
+
+      <div class="golytely-bottle">
+        <div class="bottle-icon">🫙</div>
+        <div class="bottle-info">
+          <h4 id="golytelyName">GoLytely (Bowel Cleansing Solution)</h4>
+          <p id="golytelyDesc">This medicine cleans your colon so your doctor can see clearly. It will cause you to have diarrhea — this is NORMAL and expected!</p>
+        </div>
+      </div>
+
+      <div class="time-tag">⏰ <span id="eveningDose">Evening Dose (4:00 PM – 8:00 PM)</span></div>
+
+      <div class="prep-steps">
+        <div class="prep-step" style="background:#E3F2FD">
+          <div class="step-num" style="background:var(--blue)">1</div>
+          <div class="prep-step-body">
+            <strong id="g1title">Mix the Solution</strong>
+            <p id="g1text">Fill the GoLytely jug with water up to the fill line. Shake well until all powder is dissolved. Keep in the fridge — it tastes better cold!</p>
+          </div>
+          <div class="step-icon">🫙</div>
+        </div>
+        <div class="prep-step" style="background:#F3E5F5">
+          <div class="step-num" style="background:var(--purple)">2</div>
+          <div class="prep-step-body">
+            <strong id="g2title">Start Drinking at 4:00 PM</strong>
+            <p id="g2text">Drink one 8 oz glass (240 mL) every 10–15 minutes. Set a timer to stay on track.</p>
+          </div>
+          <div class="step-icon">⏰</div>
+        </div>
+        <div class="prep-step" style="background:#E8F5E9">
+          <div class="step-num" style="background:var(--green)">3</div>
+          <div class="prep-step-body">
+            <strong id="g3title">Keep Drinking Until Gone</strong>
+            <p id="g3text">You need to drink the ENTIRE jug (usually 1 gallon / 4 liters). Don't stop — even if it feels like a lot!</p>
+          </div>
+          <div class="step-icon">🥤</div>
+        </div>
+        <div class="prep-step" style="background:#FFF8E1">
+          <div class="step-num" style="background:var(--orange)">4</div>
+          <div class="prep-step-body">
+            <strong id="g4title">Stay Near a Bathroom</strong>
+            <p id="g4text">You will need to use the bathroom many times. This is normal! Stay home and stay close to the toilet.</p>
+          </div>
+          <div class="step-icon">🚽</div>
+        </div>
+        <div class="prep-step" style="background:#FFEBEE">
+          <div class="step-num" style="background:var(--red)">5</div>
+          <div class="prep-step-body">
+            <strong id="g5title">Stop All Food & Drinks at Midnight</strong>
+            <p id="g5text">After midnight, do not eat or drink ANYTHING — not even water — until after your procedure.</p>
+          </div>
+          <div class="step-icon">🕛</div>
+        </div>
+      </div>
+
+      <div class="alert-box info">
+        <div class="alert-icon">💡</div>
+        <div class="alert-text">
+          <strong id="tipTitle">Tips to Help</strong>
+          <p id="tipText">Add a small amount of lemon or lime-flavored powder (like Crystal Light) to improve the taste. Drink through a straw. Suck on hard candy between glasses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Day Of -->
+  <div class="step-content" id="step2">
+
+    <div class="day-banner" style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FFCC02">
+      <div class="day-banner-icon">🌅</div>
+      <div class="day-banner-text" style="color:#E65100">
+        <h2 id="s2title">Day of Your Colonoscopy</h2>
+        <p id="s2sub">You're almost done! Here's what you need to do today.</p>
+      </div>
+    </div>
+
+    <div class="chaperone-big">
+      <span class="big-icon">🚗</span>
+      <h3 id="chapTitle">You MUST Have a Driver!</h3>
+      <p id="chapText">You will receive sedation medicine during your colonoscopy. This medicine makes it unsafe to drive. You CANNOT take a bus, taxi, or rideshare alone. You MUST have a responsible adult with you to drive you home.</p>
+    </div>
+
+    <div class="alert-box danger">
+      <div class="alert-icon">⛔</div>
+      <div class="alert-text">
+        <strong id="noDriverTitle">No Driver = No Procedure</strong>
+        <p id="noDriverText">If you arrive without a driver, your colonoscopy will be cancelled and rescheduled. Please arrange transportation before your appointment day!</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">📋 <span id="checklistTitle">Day-Of Checklist</span></div>
+      <ul class="checklist">
+        <li><span>🚫</span><span id="ch1">Do NOT eat or drink anything (nothing since midnight)</span></li>
+        <li><span>💊</span><span id="ch2">Only take medicines your doctor told you to take with a TINY sip of water</span></li>
+        <li><span>🪥</span><span id="ch3">Brush your teeth — but do not swallow water</span></li>
+        <li><span>👕</span><span id="ch4">Wear loose, comfortable clothing</span></li>
+        <li><span>🆔</span><span id="ch5">Bring your photo ID and any paperwork you received</span></li>
+        <li><span>📞</span><span id="ch6">Have your driver ready — they must stay at the facility</span></li>
+        <li><span>⏰</span><span id="ch7">Arrive 30 minutes before your scheduled time</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">❓ <span id="whatToExpTitle">What to Expect</span></div>
+      <div class="prep-steps">
+        <div class="prep-step" style="background:#E8F5E9">
+          <div class="step-num" style="background:var(--green)">1</div>
+          <div class="prep-step-body">
+            <strong id="exp1t">Check In & Get Ready</strong>
+            <p id="exp1p">You will change into a gown. A nurse will place an IV in your arm.</p>
+          </div>
+          <div class="step-icon">🏥</div>
+        </div>
+        <div class="prep-step" style="background:#E3F2FD">
+          <div class="step-num" style="background:var(--blue)">2</div>
+          <div class="prep-step-body">
+            <strong id="exp2t">Sedation</strong>
+            <p id="exp2p">You will be given medicine to make you sleepy and comfortable. Most patients fall asleep and feel no pain.</p>
+          </div>
+          <div class="step-icon">😴</div>
+        </div>
+        <div class="prep-step" style="background:#F3E5F5">
+          <div class="step-num" style="background:var(--purple)">3</div>
+          <div class="prep-step-body">
+            <strong id="exp3t">The Procedure (~30 minutes)</strong>
+            <p id="exp3p">The doctor uses a small camera to look inside your colon. You will be asleep.</p>
+          </div>
+          <div class="step-icon">🔭</div>
+        </div>
+        <div class="prep-step" style="background:#FFF8E1">
+          <div class="step-num" style="background:var(--orange)">4</div>
+          <div class="prep-step-body">
+            <strong id="exp4t">Recovery (1–2 hours)</strong>
+            <p id="exp4p">You will wake up in a recovery area. Your driver must pick you up. You cannot drive until the next day.</p>
+          </div>
+          <div class="step-icon">🛏️</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-box success">
+      <div class="alert-icon">🎉</div>
+      <div class="alert-text">
+        <strong id="congTitle">Great Job!</strong>
+        <p id="congText">Completing your colonoscopy prep is an important step in taking care of your health. You can do this!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-buttons">
+    <button class="nav-btn prev" id="prevBtn" onclick="changeStep(-1)" disabled>← <span id="prevLabel">Back</span></button>
+    <button class="nav-btn next" id="nextBtn" onclick="changeStep(1)"><span id="nextLabel">Next</span> →</button>
+  </div>
+</div>
+
+<script>
+  let currentLang = 'en';
+  let currentStep = 0;
+  const totalSteps = 3;
+
+  const translations = {
+    en: {
+      homeTitle: 'Colonoscopy\nPrep Guide',
+      homeSub: 'Your step-by-step preparation plan',
+      langPrompt: '🌐 Choose Your Language',
+      hospitalNote: '📋 Please bring this guide to your appointment',
+      tlTitle: 'Your Colonoscopy Plan',
+      tlSub: 'Follow each step carefully',
+      prog0: '5 Days\nBefore',
+      prog1: '1 Day\nBefore',
+      prog2: 'Day Of',
+      // Step 0
+      s0title: '5 Days Before Your Colonoscopy',
+      s0sub: 'Eat a LOW-FIBER diet',
+      s0avoidTitle: 'AVOID These Foods',
+      s0avoidLabel: 'Do NOT Eat',
+      s0okTitle: 'You CAN Eat These',
+      s0okLabel: 'OK to Eat',
+      f1:'Beans & Lentils',f2:'Corn',f3:'Broccoli',f4:'Leafy Greens',
+      f5:'Whole Fruit',f6:'Berries',f7:'Nuts & Seeds',f8:'Whole Grain Bread',
+      f9:'Corn Tortillas',f10:'Raw Salad',f11:'Tomatoes',f12:'Raw Carrots',
+      g1:'White Rice',g2:'White Pasta',g3:'Eggs',g4:'Chicken',
+      g5:'Fish',g6:'Low-fat Dairy',g7:'Banana',g8:'Peeled Potato',
+      medAlert:'Taking medications?',
+      medAlertText:'Talk to your doctor about which medicines to take or stop before the colonoscopy.',
+      // Step 1
+      s1title: '1 Day Before — Clear Liquids Only',
+      s1sub: 'No solid food today. Drink only clear liquids.',
+      s1okLiq: 'Clear Liquids You CAN Drink',
+      liq1:'Water',liq2:'Clear Broth',liq3:'Tea (no milk)',liq4:'Black Coffee',
+      liq5:'Clear Apple Juice',liq6:'Yellow/Orange Jello',liq7:'White Grape Juice',liq8:'Sports Drinks (clear)',
+      s1noLiq: 'Do NOT Drink These',
+      noLiq1:'Red Juices',noLiq2:'Purple Grape Juice',noLiq3:'Milk',
+      noLiq4:'OJ/Citrus Juice',noLiq5:'Alcohol',noLiq6:'Red/Purple Jello',
+      noRedAlert:'⛔ NO Red or Purple Drinks!',
+      noRedText:'Red and purple colors look like blood during the colonoscopy. This can cause your doctor to think something is wrong. Avoid ALL red and purple liquids!',
+      golytelyTitle: 'GoLytely Bowel Prep',
+      golytelyName: 'GoLytely (Bowel Cleansing Solution)',
+      golytelyDesc: 'This medicine cleans your colon so your doctor can see clearly. It will cause you to have diarrhea — this is NORMAL and expected!',
+      eveningDose: '⏰ Evening Dose (4:00 PM – 8:00 PM)',
+      g1title:'Mix the Solution',g1text:'Fill the GoLytely jug with water up to the fill line. Shake well until all powder is dissolved. Keep in the fridge — it tastes better cold!',
+      g2title:'Start Drinking at 4:00 PM',g2text:'Drink one 8 oz glass (240 mL) every 10–15 minutes. Set a timer to stay on track.',
+      g3title:'Keep Drinking Until Gone',g3text:'You need to drink the ENTIRE jug (usually 1 gallon / 4 liters). Don\'t stop — even if it feels like a lot!',
+      g4title:'Stay Near a Bathroom',g4text:'You will need to use the bathroom many times. This is normal! Stay home and stay close to the toilet.',
+      g5title:'Stop All Food & Drinks at Midnight',g5text:'After midnight, do not eat or drink ANYTHING — not even water — until after your procedure.',
+      tipTitle:'Tips to Help',
+      tipText:'Add a small amount of lemon or lime-flavored powder (like Crystal Light) to improve the taste. Drink through a straw. Suck on hard candy between glasses.',
+      // Step 2
+      s2title: 'Day of Your Colonoscopy',
+      s2sub: 'You\'re almost done! Here\'s what you need to do today.',
+      chapTitle: 'You MUST Have a Driver!',
+      chapText: 'You will receive sedation medicine during your colonoscopy. This medicine makes it unsafe to drive. You CANNOT take a bus, taxi, or rideshare alone. You MUST have a responsible adult with you to drive you home.',
+      noDriverTitle: 'No Driver = No Procedure',
+      noDriverText: 'If you arrive without a driver, your colonoscopy will be cancelled and rescheduled. Please arrange transportation before your appointment day!',
+      checklistTitle: 'Day-Of Checklist',
+      ch1:'Do NOT eat or drink anything (nothing since midnight)',
+      ch2:'Only take medicines your doctor told you to take with a TINY sip of water',
+      ch3:'Brush your teeth — but do not swallow water',
+      ch4:'Wear loose, comfortable clothing',
+      ch5:'Bring your photo ID and any paperwork you received',
+      ch6:'Have your driver ready — they must stay at the facility',
+      ch7:'Arrive 30 minutes before your scheduled time',
+      whatToExpTitle:'What to Expect',
+      exp1t:'Check In & Get Ready',exp1p:'You will change into a gown. A nurse will place an IV in your arm.',
+      exp2t:'Sedation',exp2p:'You will be given medicine to make you sleepy and comfortable. Most patients fall asleep and feel no pain.',
+      exp3t:'The Procedure (~30 minutes)',exp3p:'The doctor uses a small camera to look inside your colon. You will be asleep.',
+      exp4t:'Recovery (1–2 hours)',exp4p:'You will wake up in a recovery area. Your driver must pick you up. You cannot drive until the next day.',
+      congTitle:'Great Job!',
+      congText:'Completing your colonoscopy prep is an important step in taking care of your health. You can do this!',
+      prevLabel:'Back',
+      nextLabel:'Next',
+    },
+    es: {
+      homeTitle: 'Guía de\nPreparación',
+      homeSub: 'Plan paso a paso para su colonoscopía',
+      langPrompt: '🌐 Elige tu idioma',
+      hospitalNote: '📋 Por favor traiga esta guía a su cita',
+      tlTitle: 'Su Plan para la Colonoscopía',
+      tlSub: 'Siga cada paso con cuidado',
+      prog0: '5 Días\nAntes',
+      prog1: '1 Día\nAntes',
+      prog2: 'El Día De',
+      s0title: '5 Días Antes de su Colonoscopía',
+      s0sub: 'Coma una dieta BAJA EN FIBRA',
+      s0avoidTitle: 'EVITE Estos Alimentos',
+      s0avoidLabel: 'NO Coma',
+      s0okTitle: 'PUEDE Comer Estos',
+      s0okLabel: 'Está Bien Comer',
+      f1:'Frijoles y Lentejas',f2:'Maíz',f3:'Brócoli',f4:'Verduras de Hoja',
+      f5:'Fruta Entera',f6:'Fresas/Moras',f7:'Nueces y Semillas',f8:'Pan Integral',
+      f9:'Tortillas de Maíz',f10:'Ensalada Cruda',f11:'Tomates',f12:'Zanahorias Crudas',
+      g1:'Arroz Blanco',g2:'Pasta Blanca',g3:'Huevos',g4:'Pollo',
+      g5:'Pescado',g6:'Lácteos Bajos en Grasa',g7:'Plátano',g8:'Papa Pelada',
+      medAlert:'¿Toma medicamentos?',
+      medAlertText:'Hable con su médico sobre qué medicamentos debe tomar o dejar antes de la colonoscopía.',
+      s1title: '1 Día Antes — Solo Líquidos Claros',
+      s1sub: 'Hoy no coma alimentos sólidos. Solo tome líquidos claros.',
+      s1okLiq: 'Líquidos Claros que PUEDE Tomar',
+      liq1:'Agua',liq2:'Caldo Claro',liq3:'Té (sin leche)',liq4:'Café Negro',
+      liq5:'Jugo de Manzana Claro',liq6:'Gelatina Amarilla/Naranja',liq7:'Jugo de Uva Blanca',liq8:'Bebidas Deportivas (claras)',
+      s1noLiq: 'NO Tome Estos',
+      noLiq1:'Jugos Rojos',noLiq2:'Jugo de Uva Morado',noLiq3:'Leche',
+      noLiq4:'Jugo de Naranja',noLiq5:'Alcohol',noLiq6:'Gelatina Roja/Morada',
+      noRedAlert:'⛔ ¡NO bebidas rojas ni moradas!',
+      noRedText:'Los colores rojos y morados se parecen a sangre durante la colonoscopía. Esto puede confundir a su doctor. ¡Evite TODOS los líquidos rojos y morados!',
+      golytelyTitle: 'Preparación con GoLytely',
+      golytelyName: 'GoLytely (Solución de Limpieza del Colon)',
+      golytelyDesc: 'Este medicamento limpia su colon para que el médico pueda ver con claridad. Le causará diarrea — ¡esto es NORMAL y esperado!',
+      eveningDose: '⏰ Dosis de la Tarde (4:00 PM – 8:00 PM)',
+      g1title:'Mezcle la Solución',g1text:'Llene el recipiente de GoLytely con agua hasta la línea indicada. Agite bien hasta que el polvo se disuelva. Guárdelo en el refrigerador — ¡sabe mejor frío!',
+      g2title:'Empiece a Tomar a las 4:00 PM',g2text:'Tome un vaso de 8 oz (240 mL) cada 10–15 minutos. Use un temporizador para mantenerse al tanto.',
+      g3title:'Siga Tomando Hasta Terminar',g3text:'Necesita tomar el recipiente COMPLETO (generalmente 1 galón / 4 litros). ¡No pare — aunque parezca mucho!',
+      g4title:'Quédese Cerca del Baño',g4text:'Necesitará ir al baño muchas veces. ¡Esto es normal! Quédese en casa cerca del baño.',
+      g5title:'Deje de Comer y Beber a la Medianoche',g5text:'Después de medianoche, no coma ni beba NADA — ni siquiera agua — hasta después de su procedimiento.',
+      tipTitle:'Consejos para Ayudar',
+      tipText:'Agregue un poco de polvo de limón o lima (como Crystal Light) para mejorar el sabor. Beba con un popote. Chupe dulces duros entre vasos.',
+      s2title: 'El Día de su Colonoscopía',
+      s2sub: '¡Ya casi termina! Esto es lo que necesita hacer hoy.',
+      chapTitle: '¡DEBE Tener un Conductor!',
+      chapText: 'Recibirá medicamento de sedación durante su colonoscopía. Este medicamento hace que no sea seguro conducir. NO PUEDE tomar el autobús, un taxi o Uber solo. DEBE tener un adulto responsable que lo lleve a casa.',
+      noDriverTitle: 'Sin Conductor = Sin Procedimiento',
+      noDriverText: 'Si llega sin un conductor, su colonoscopía será cancelada y reprogramada. ¡Por favor arregle el transporte antes del día de su cita!',
+      checklistTitle: 'Lista del Día del Procedimiento',
+      ch1:'NO coma ni beba nada (nada desde la medianoche)',
+      ch2:'Solo tome los medicamentos que su médico le dijo que tomara con UN PEQUEÑO sorbo de agua',
+      ch3:'Cepíllese los dientes — pero no trague agua',
+      ch4:'Use ropa cómoda y holgada',
+      ch5:'Traiga su identificación con foto y cualquier documentación recibida',
+      ch6:'Tenga listo a su conductor — debe quedarse en la instalación',
+      ch7:'Llegue 30 minutos antes de su hora programada',
+      whatToExpTitle:'Qué Esperar',
+      exp1t:'Registro y Preparación',exp1p:'Se cambiará a una bata. Una enfermera le colocará un suero en el brazo.',
+      exp2t:'Sedación',exp2p:'Le darán medicamento para ponerlo a dormir y hacerlo sentir cómodo. La mayoría de los pacientes se duermen y no sienten dolor.',
+      exp3t:'El Procedimiento (~30 minutos)',exp3p:'El médico usa una pequeña cámara para ver el interior de su colon. Usted estará dormido.',
+      exp4t:'Recuperación (1–2 horas)',exp4p:'Se despertará en un área de recuperación. Su conductor debe recogerlo. No puede conducir hasta el día siguiente.',
+      congTitle:'¡Muy Bien!',
+      congText:'Completar la preparación para la colonoscopía es un paso importante para cuidar su salud. ¡Usted puede hacerlo!',
+      prevLabel:'Atrás',
+      nextLabel:'Siguiente',
+    }
+  };
+
+  function applyTranslation(lang) {
+    const t = translations[lang];
+    for (const key in t) {
+      const el = document.getElementById(key);
+      if (el) el.textContent = t[key];
+    }
+  }
+
+  function startGuide(lang) {
+    currentLang = lang;
+    currentStep = 0;
+    applyTranslation(lang);
+    document.getElementById('home').classList.remove('active');
+    document.getElementById('timeline').classList.add('active');
+    updateStep();
+    document.getElementById('timeline').scrollTop = 0;
+  }
+
+  function goHome() {
+    document.getElementById('timeline').classList.remove('active');
+    document.getElementById('home').classList.add('active');
+  }
+
+  function goToStep(n) {
+    currentStep = n;
+    updateStep();
+    document.getElementById('timeline').scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function changeStep(dir) {
+    const newStep = currentStep + dir;
+    if (newStep >= 0 && newStep < totalSteps) {
+      currentStep = newStep;
+      updateStep();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+  }
+
+  function updateStep() {
+    // Update content panels
+    document.querySelectorAll('.step-content').forEach((el, i) => {
+      el.classList.toggle('active', i === currentStep);
+    });
+
+    // Update progress dots
+    document.querySelectorAll('.prog-step').forEach((el, i) => {
+      el.classList.toggle('active', i === currentStep);
+      el.classList.toggle('done', i < currentStep);
+    });
+
+    // Update nav buttons
+    const t = translations[currentLang];
+    document.getElementById('prevBtn').disabled = currentStep === 0;
+    document.getElementById('nextBtn').disabled = currentStep === totalSteps - 1;
+    document.getElementById('prevLabel').textContent = t.prevLabel;
+    document.getElementById('nextLabel').textContent = currentStep === totalSteps - 1 ? (currentLang === 'es' ? '¡Listo!' : 'Done!') : t.nextLabel;
+    document.getElementById('nextBtn').style.background = currentStep === totalSteps - 1 ? 'var(--green)' : 'var(--teal)';
+  }
+</script>
+</body>
+</html>
